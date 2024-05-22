@@ -1,19 +1,23 @@
+"""
+This module provides functionality to login to an admin site and post data to an API endpoint.
+"""
+
 import requests
 from requests.auth import HTTPBasicAuth
 
 # Define the URLs
-admin_url = "https://yousrowncastsite.com/admin/"
-post_url = "https://yousrowncastsite.com/api/admin/config/video/streamoutputvariants"
+ADMIN_URL = "https://yousrowncastsite.com/admin/"
+POST_URL = "https://yousrowncastsite.com/api/admin/config/video/streamoutputvariants"
 
 # Define login credentials
-username = "admin"
-password = "abc123"
+USERNAME = "admin"
+PASSWORD = "abc123"
 
 # Start a session to persist the login
 session = requests.Session()
 
 # Send the GET request to the admin page with Basic Auth
-admin_response = session.get(admin_url, auth=HTTPBasicAuth(username, password))
+admin_response = session.get(ADMIN_URL, auth=HTTPBasicAuth(USERNAME, PASSWORD))
 
 # Check if login was successful
 if admin_response.status_code == 200:
@@ -41,10 +45,11 @@ if admin_response.status_code == 200:
     }
 
     # Send the POST request with Basic Auth
-    post_response = session.post(post_url, headers=headers, json=data, auth=HTTPBasicAuth(username, password))
+    post_response = session.post(POST_URL, headers=headers, json=data, auth=HTTPBasicAuth(USERNAME, PASSWORD))
 
     # Print the response
     print(f"Status Code: {post_response.status_code}")
     print(f"Response Text: {post_response.text}")
 else:
     print("Login failed")
+
